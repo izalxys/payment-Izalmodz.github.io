@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R Payment - Izalmodzganteng</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'slide-in': 'slideIn 0.5s ease-out',
+                        'bounce-in': 'bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out',
+                        'pulse-glow': 'pulseGlow 2s infinite',
+                        'shimmer': 'shimmer 2s linear infinite',
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        @keyframes glow {
+            from { box-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
+            to { box-shadow: 0 0 30px rgba(59, 130, 246, 0.8); }
+        }
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes bounceIn {
+            0% { transform: scale(0.3) rotate(-10deg); opacity: 0; }
+            50% { transform: scale(1.05) rotate(5deg); }
+            70% { transform: scale(0.9) rotate(-2deg); }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(139, 92, 246, 0.6); }
+        }
+        @keyframes shimmer {
+            0% { background-position: -200px 0; }
+            100% { background-position: calc(200px + 100%) 0; }
+        }
+        
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .dark .glass-morphism {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .shimmer-effect {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            background-size: 200px 100%;
+            animation: shimmer 2s infinite;
+        }
+        
+        .floating-bubble {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            animation: floatUp 3s ease-out forwards;
+        }
+        
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) scale(0);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-100px) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-200px) scale(0);
+                opacity: 0;
+            }
+        }
+        
+        .neon-glow {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+            transition: all 0.3s ease;
+        }
+        .neon-glow:hover {
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.8);
+        }
+        
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-10px) scale(1.02);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 dark:from-gray-900 dark:via-purple-900 dark:to-indigo-900 overflow-x-hidden">
+    <!-- Animated Background -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float"></div>
+        <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float" style="animation-delay: 2s;"></div>
+        <div class="absolute top-40 left-1/2 w-80 h-80 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float" style="animation-delay: 4s;"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="glass-morphism sticky top-0 z-50 px-4 py-4 border-b border-white/10">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <svg class="w-10 h-10 text-blue-400 animate-pulse-glow" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z"/>
+                        <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" fill="none"/>
+                    </svg>
+                    <div class="absolute inset-0 bg-blue-400 rounded-full blur-lg opacity-30 animate-pulse"></div>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">R Payment</h1>
+                    <p class="text-xs text-gray-300">Izalmodz payment nieh</p>
+                </div>
+            </div>
+            
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#methods" class="text-gray-300 hover:text-blue-400 transition-all duration-300 hover:scale-110">Metode</a>
+                <a href="#qris" class="text-gray-300 hover:text-purple-400 transition-all duration-300 hover:scale-110">QRIS</a>
+                <a href="#features" class="text-gray-300 hover:text-pink-400 transition-all duration-300 hover:scale-110">Fitur</a>
+                <a href="#help" class="text-gray-300 hover:text-green-400 transition-all duration-300 hover:scale-110">Bantuan</a>
+            </nav>
+
+            <button id="themeToggle" class="relative p-3 glass-morphism rounded-full hover:scale-110 transition-all duration-300 neon-glow">
+                <svg id="sunIcon" class="w-6 h-6 text-yellow-400 hidden dark:block transition-all duration-300" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 2L13.09 8.26L20 9L14 14.74L15.18 21.02L10 17.77L4.82 21.02L6 14.74L0 9L6.91 8.26L10 2Z"/>
+                </svg>
+                <svg id="moonIcon" class="w-6 h-6 text-purple-400 block dark:hidden transition-all duration-300" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="relative z-10 max-w-7xl mx-auto px-4 py-12">
+        <!-- Hero Section -->
+        <section class="text-center mb-20 animate-fade-in-up">
+            <div class="relative">
+                <h2 class="text-6xl md:text-8xl font-bold mb-6">
+                    <span class="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-shimmer">
+                        Izal Payment
+                    </span>
+                </h2>
+                <div class="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 blur-3xl opacity-20 animate-pulse"></div>
+            </div>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-8 leading-relaxed">
+                Revolusi pembayaran digital dengan teknologi terdepan. Cepat, aman, dan sangat mudah digunakan.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full font-semibold hover:scale-105 transition-all duration-300 neon-glow">
+                    Mulai Sekarang
+                </button>
+                <button class="px-8 py-4 glass-morphism text-white rounded-full font-semibold hover:scale-105 transition-all duration-300">
+                    Pelajari Lebih Lanjut
+                </button>
+            </div>
+        </section>
+
+        <!-- Payment Methods -->
+        <section id="methods" class="mb-20">
+            <div class="text-center mb-12">
+                <h3 class="text-4xl font-bold text-white mb-4">Metode Pembayaran</h3>
+                <p class="text-gray-300 text-lg">Pilih metode pembayaran favorit Anda</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- DANA -->
+                <div class="glass-morphism rounded-2xl p-8 card-hover group relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
+                    <div class="relative z-10">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="relative">
+                                <svg class="w-16 h-16 drop-shadow-lg" viewBox="0 0 100 100">
+                                    <defs>
+                                        <linearGradient id="danaGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#118EEA"/>
+                                            <stop offset="100%" style="stop-color:#0066CC"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <rect width="100" height="100" rx="20" fill="url(#danaGradient)"/>
+                                    <text x="50" y="60" text-anchor="middle" fill="white" font-size="20" font-weight="bold">DANA</text>
+                                </svg>
+                                <div class="absolute inset-0 bg-blue-500 rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition-all duration-300"></div>
+                            </div>
+                            <span class="px-3 py-1 bg-blue-500/20 text-blue-300 text-sm rounded-full">E-Wallet</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2">DANA</h4>
+                        <p class="text-gray-300 mb-6 font-mono text-lg" id="dana-number">087840418101</p>
+                        <button onclick="copyPaymentAdvanced('DANA', '087840418101', this)" class="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white py-3 px-6 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center space-x-3 group-hover:scale-105">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                            </svg>
+                            <span>Copy Number</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- GoPay -->
+                <div class="glass-morphism rounded-2xl p-8 card-hover group relative overflow-hidden" style="animation-delay: 0.1s">
+                    <div class="absolute inset-0 bg-gradient-to-br from-green-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
+                    <div class="relative z-10">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="relative">
+                                <svg class="w-16 h-16 drop-shadow-lg" viewBox="0 0 100 100">
+                                    <defs>
+                                        <linearGradient id="gopayGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#00AA13"/>
+                                            <stop offset="100%" style="stop-color:#008A10"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <rect width="100" height="100" rx="20" fill="url(#gopayGradient)"/>
+                                    <text x="50" y="60" text-anchor="middle" fill="white" font-size="18" font-weight="bold">GoPay</text>
+                                </svg>
+                                <div class="absolute inset-0 bg-green-500 rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition-all duration-300"></div>
+                            </div>
+                            <span class="px-3 py-1 bg-green-500/20 text-green-300 text-sm rounded-full">E-Wallet</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2">GoPay</h4>
+                        <p class="text-gray-300 mb-6 font-mono text-lg">087817757895</p>
+                        <button onclick="copyPaymentAdvanced('GoPay', '087817757895', this)" class="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white py-3 px-6 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center space-x-3 group-hover:scale-105">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                            </svg>
+                            <span>Copy Number</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- OVO -->
+                <div class="glass-morphism rounded-2xl p-8 card-hover group relative overflow-hidden" style="animation-delay: 0.2s">
+                    <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
+                    <div class="relative z-10">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="relative">
+                                <svg class="w-16 h-16 drop-shadow-lg" viewBox="0 0 100 100">
+                                    <defs>
+                                        <linearGradient id="ovoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#4C3494"/>
+                                            <stop offset="100%" style="stop-color:#3A2470"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <rect width="100" height="100" rx="20" fill="url(#ovoGradient)"/>
+                                    <text x="50" y="60" text-anchor="middle" fill="white" font-size="24" font-weight="bold">OVO</text>
+                                </svg>
+                                <div class="absolute inset-0 bg-purple-500 rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition-all duration-300"></div>
+                            </div>
+                            <span class="px-3 py-1 bg-purple-500/20 text-purple-300 text-sm rounded-full">E-Wallet</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2">OVO</h4>
+                        <p class="text-gray-300 mb-6 font-mono text-lg">087817757895</p>
+                        <button onclick="copyPaymentAdvanced('OVO', '087817757895', this)" class="w-full bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white py-3 px-6 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center space-x-3 group-hover:scale-105">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                            </svg>
+                            <span>Copy Number</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- BCA -->
+                <div class="glass-morphism rounded-2xl p-8 card-hover group relative overflow-hidden" style="animation-delay: 0.3s">
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-800/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
+                    <div class="relative z-10">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="relative">
+                                <svg class="w-16 h-16 drop-shadow-lg" viewBox="0 0 100 100">
+                                    <defs>
+                                        <linearGradient id="bcaGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#003087"/>
+                                            <stop offset="100%" style="stop-color:#002060"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <rect width="100" height="100" rx="20" fill="url(#bcaGradient)"/>
+                                    <text x="50" y="60" text-anchor="middle" fill="white" font-size="24" font-weight="bold">BCA</text>
+                                </svg>
+                                <div class="absolute inset-0 bg-blue-800 rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition-all duration-300"></div>
+                            </div>
+                            <span class="px-3 py-1 bg-blue-800/20 text-blue-300 text-sm rounded-full">Bank</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2">BCA</h4>
+                        <p class="text-gray-300 mb-6 font-mono text-lg">Comming</p>
+                        <button onclick="copyPaymentAdvanced('BCA', 'minta ke t.me/Izalmodz', this)" class="w-full bg-gradient-to-r from-blue-800 to-blue-900 hover:from-blue-900 hover:to-blue-950 text-white py-3 px-6 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center space-x-3 group-hover:scale-105">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                            </svg>
+                            <span>Copy Number</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- QRIS Section -->
+        <section id="qris" class="mb-20">
+            <div class="glass-morphism rounded-3xl p-12 text-center relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-purple-500/10 to-pink-500/10"></div>
+                <div class="relative z-10">
+                    <div class="mb-8">
+                        <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl mb-6 animate-pulse-glow">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-4xl font-bold text-white mb-4">QRIS Izal</h3>
+                        <p class="text-gray-300 text-lg max-w-2xl mx-auto">
+                            Scan QR Code untuk pembayaran instan dengan teknologi terdepan. Cepat, aman, dan mudah.
+                        </p>
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                        <button onclick="viewQRISAdvanced()" class="group px-8 py-4 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white rounded-2xl font-semibold transition-all duration-300 flex items-center justify-center space-x-3 hover:scale-105 neon-glow">
+                            <svg class="w-6 h-6 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                            </svg>
+                            <span>Lihat QRIS</span>
+                        </button>
+                        
+                        <button onclick="downloadQRISAdvanced(this)" class="group px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white rounded-2xl font-semibold transition-all duration-300 flex items-center justify-center space-x-3 hover:scale-105 neon-glow">
+                            <svg class="w-6 h-6 group-hover:translate-y-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                            <span>Download QRIS</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Music Player -->
+        <section id="features" class="mb-20">
+            <div class="glass-morphism rounded-3xl p-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-2xl font-bold text-white">Ambient Music</h3>
+                    <div class="flex items-center space-x-2">
+                        <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                        <span class="text-green-400 text-sm">Live</span>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-6">
+                    <button id="playPauseBtn" onclick="toggleMusicAdvanced()" class="group relative p-4 bg-gradient-to-br from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white rounded-2xl transition-all duration-300 hover:scale-110 neon-glow">
+                        <svg id="playIcon" class="w-8 h-8 group-hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M8 5v10l8-5-8-5z"/>
+                        </svg>
+                        <svg id="pauseIcon" class="w-8 h-8 hidden group-hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M5 4h3v12H5V4zm7 0h3v12h-3V4z"/>
+                        </svg>
+                        <div class="absolute inset-0 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl blur-lg opacity-50 group-hover:opacity-75 transition-all duration-300"></div>
+                    </button>
+                    
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-white font-semibold">Relaxing Ambient Waves</span>
+                            <span id="duration" class="text-gray-300 text-sm font-mono">0:00 / 3:00</span>
+                        </div>
+                        <div class="relative w-full bg-gray-700/50 rounded-full h-3 overflow-hidden">
+                            <div id="progress" class="bg-gradient-to-r from-purple-500 to-pink-500 h-3 rounded-full transition-all duration-300 relative" style="width: 0%">
+                                <div class="absolute inset-0 bg-white/20 animate-shimmer"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button id="muteBtn" onclick="toggleMuteAdvanced()" class="group p-3 glass-morphism rounded-xl hover:scale-110 transition-all duration-300 text-gray-300 hover:text-white">
+                        <svg id="volumeIcon" class="w-6 h-6 group-hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.617.824L4.168 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.168l4.215-3.824a1 1 0 011.617.824z"/>
+                            <path d="M11.293 7.293a1 1 0 011.414 0L15 9.586l2.293-2.293a1 1 0 111.414 1.414L16.414 11l2.293 2.293a1 1 0 01-1.414 1.414L15 12.414l-2.293 2.293a1 1 0 01-1.414-1.414L13.586 11l-2.293-2.293a1 1 0 010-1.414z"/>
+                        </svg>
+                        <svg id="muteIcon" class="w-6 h-6 hidden group-hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.617.824L4.168 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.168l4.215-3.824a1 1 0 011.617.824z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 text-center py-12 glass-morphism mx-4 rounded-t-3xl">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex items-center justify-center space-x-4 mb-6">
+                <svg class="w-8 h-8 text-blue-400" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z"/>
+                </svg>
+                <span class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">R Payment</span>
+            </div>
+            <p class="text-gray-300 mb-4">&copy; 2025 R Payment. © Copyright - Izal Mods.</p>
+            <p class="text-gray-400 text-sm">Revolusi pembayaran digital yang aman, cepat, dan terpercaya</p>
+        </div>
+    </footer>
+
+    <!-- Advanced Toast Container -->
+    <div id="toastContainer" class="fixed top-24 right-6 z-[9999] space-y-4"></div>
+
+    <!-- Advanced QRIS Modal -->
+<div id="qrisModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[9999] hidden flex items-center justify-center p-4">
+    <div class="glass-morphism rounded-3xl p-8 max-w-lg w-full animate-bounce-in relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-purple-500/10 to-pink-500/10"></div>
+        <div class="relative z-10">
+            <div class="flex justify-between items-center mb-8">
+                <div>
+                    <h3 class="text-2xl font-bold text-white mb-2">QRIS Izal Code</h3>
+                    <p class="text-gray-300 text-sm">Scan untuk pembayaran instan</p>
+                </div>
+                <button onclick="closeQRISModalAdvanced()" class="p-2 glass-morphism rounded-xl text-gray-400 hover:text-white hover:scale-110 transition-all duration-300">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="text-center">
+                <div id="qrisContent" class="mb-8 relative">
+                    <div class="relative inline-block">
+                        <!-- GANTI LINK QRIS DI SINI -->
+                        <img src="https://github.com/Izaldev.png" 
+                             alt="QRIS" 
+                             class="w-64 h-64 mx-auto border-4 border-white/20 rounded-2xl shadow-2xl" />
+                        
+                        <div class="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-2xl animate-pulse"></div>
+                    </div>
+                </div>
+                
+                <div class="space-y-4">
+                    <p class="text-gray-300 text-sm">
+                        Scan QR code ini menggunakan aplikasi pembayaran favorit Anda
+                    </p>
+                    
+                    <button onclick="downloadQRISAdvanced(this)" class="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white py-4 px-6 rounded-2xl font-semibold transition-all duration-300 flex items-center justify-center space-x-3 hover:scale-105 neon-glow">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        <span>Download High Quality PNG</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script>
+        // Enhanced Theme Management
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        html.classList.toggle('dark', savedTheme === 'dark');
+        
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            const isDark = html.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            
+            // Add theme switch animation
+            themeToggle.style.transform = 'rotate(360deg)';
+            setTimeout(() => {
+                themeToggle.style.transform = 'rotate(0deg)';
+            }, 300);
+        });
+
+        // Advanced Copy Payment with Floating Bubbles - Fixed Version
+        function copyPaymentAdvanced(method, number, button) {
+            const originalContent = button.innerHTML;
+            
+            // Enhanced loading animation
+            button.innerHTML = `
+                <svg class="w-5 h-5 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                </svg>
+                <span>Copying...</span>
+            `;
+            button.classList.add('animate-pulse');
+            button.disabled = true;
+            
+            // Multiple fallback methods for copying
+            let copySuccess = false;
+            
+            // Method 1: Modern Clipboard API
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(number).then(() => {
+                    copySuccess = true;
+                    handleCopySuccess(method, number, button, originalContent);
+                }).catch(() => {
+                    // Fallback to Method 2
+                    copyWithFallback(method, number, button, originalContent);
+                });
+            } else {
+                // Fallback to Method 2 immediately
+                copyWithFallback(method, number, button, originalContent);
+            }
+        }
+        
+        // Fallback copy method
+        function copyWithFallback(method, number, button, originalContent) {
+            try {
+                // Method 2: Create temporary textarea
+                const textArea = document.createElement('textarea');
+                textArea.value = number;
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-999999px';
+                textArea.style.top = '-999999px';
+                textArea.style.opacity = '0';
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                
+                const successful = document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                if (successful) {
+                    handleCopySuccess(method, number, button, originalContent);
+                } else {
+                    // Method 3: Manual selection fallback
+                    handleCopyError(button, originalContent);
+                }
+            } catch (err) {
+                handleCopyError(button, originalContent);
+            }
+        }
+        
+        // Handle successful copy
+        function handleCopySuccess(method, number, button, originalContent) {
+            // Create floating bubbles effect
+            createFloatingBubbles(button, method);
+            
+            // Success animation
+            setTimeout(() => {
+                button.innerHTML = `
+                    <svg class="w-5 h-5 text-green-300" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                    <span>Berhasil Disalin!</span>
+                `;
+                button.classList.remove('animate-pulse');
+                button.disabled = false;
+                
+                // Restore original content
+                setTimeout(() => {
+                    button.innerHTML = originalContent;
+                }, 2500);
+            }, 600);
+            
+            // Show advanced toast
+            showAdvancedToast(`Nomor ${method} berhasil disalin!`, 'success', number, method);
+        }
+        
+        // Handle copy error
+        function handleCopyError(button, originalContent) {
+            button.innerHTML = `
+                <svg class="w-5 h-5 text-red-300" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                </svg>
+                <span>Copy Manual</span>
+            `;
+            button.classList.remove('animate-pulse');
+            button.disabled = false;
+            
+            setTimeout(() => {
+                button.innerHTML = originalContent;
+            }, 3000);
+            
+            showAdvancedToast('Silakan salin nomor secara manual', 'info');
+        }
+
+        // Create Floating Bubbles Effect
+        function createFloatingBubbles(button, method) {
+            const rect = button.getBoundingClientRect();
+            const colors = {
+                'DANA': ['#118EEA', '#0066CC'],
+                'GoPay': ['#00AA13', '#008A10'],
+                'OVO': ['#4C3494', '#3A2470'],
+                'BCA': ['#003087', '#002060']
+            };
+            
+            for (let i = 0; i < 8; i++) {
+                setTimeout(() => {
+                    const bubble = document.createElement('div');
+                    bubble.className = 'floating-bubble';
+                    
+                    const size = Math.random() * 20 + 10;
+                    const color = colors[method] ? colors[method][Math.floor(Math.random() * 2)] : '#118EEA';
+                    
+                    bubble.style.cssText = `
+                        width: ${size}px;
+                        height: ${size}px;
+                        background: linear-gradient(45deg, ${color}, ${color}aa);
+                        border-radius: 50%;
+                        left: ${rect.left + Math.random() * rect.width}px;
+                        top: ${rect.top + rect.height/2}px;
+                        box-shadow: 0 0 20px ${color}66;
+                    `;
+                    
+                    document.body.appendChild(bubble);
+                    
+                    setTimeout(() => {
+                        if (bubble.parentNode) {
+                            bubble.remove();
+                        }
+                    }, 3000);
+                }, i * 100);
+            }
+        }
+
+        // Advanced Toast System
+        function showAdvancedToast(message, type = 'success', paymentNumber = null, method = null) {
+            const toastContainer = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            
+            const colors = {
+                success: 'from-green-500 to-emerald-600',
+                error: 'from-red-500 to-rose-600',
+                info: 'from-blue-500 to-indigo-600'
+            };
+            
+            const icons = {
+                success: `<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>`,
+                error: `<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                </svg>`
+            };
+            
+            toast.className = `bg-gradient-to-r ${colors[type]} text-white p-6 rounded-2xl shadow-2xl flex items-start space-x-4 animate-slide-in min-w-96 glass-morphism border border-white/20`;
+            toast.innerHTML = `
+                <div class="flex-shrink-0 p-2 bg-white/20 rounded-xl">
+                    ${icons[type]}
+                </div>
+                <div class="flex-1">
+                    <p class="font-bold text-lg mb-1">${message}</p>
+                    ${paymentNumber ? `
+                        <p class="text-sm opacity-90 mb-3 font-mono">${paymentNumber}</p>
+                        <div class="flex space-x-2">
+                            <button onclick="copyAgainAdvanced('${paymentNumber}', '${method}')" class="px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg text-sm font-semibold transition-all duration-300 hover:scale-105">
+                                Salin Lagi
+                            </button>
+                            <button onclick="sharePayment('${method}', '${paymentNumber}')" class="px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg text-sm font-semibold transition-all duration-300 hover:scale-105">
+                                Share
+                            </button>
+                        </div>
+                    ` : ''}
+                </div>
+                <button onclick="this.parentElement.remove()" class="flex-shrink-0 p-2 text-white/80 hover:text-white hover:bg-white/20 rounded-xl transition-all duration-300">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            `;
+            
+            toastContainer.appendChild(toast);
+            
+            // Auto dismiss with progress bar
+            const progressBar = document.createElement('div');
+            progressBar.className = 'absolute bottom-0 left-0 h-1 bg-white/30 rounded-full transition-all duration-[6000ms] ease-linear';
+            progressBar.style.width = '100%';
+            toast.style.position = 'relative';
+            toast.appendChild(progressBar);
+            
+            setTimeout(() => {
+                progressBar.style.width = '0%';
+            }, 100);
+            
+            setTimeout(() => {
+                if (toast.parentElement) {
+                    toast.style.transform = 'translateX(100%)';
+                    toast.style.opacity = '0';
+                    setTimeout(() => toast.remove(), 300);
+                }
+            }, 6000);
+        }
+
+        // Copy Again with Enhanced Animation - Fixed Version
+        function copyAgainAdvanced(number, method) {
+            // Multiple fallback methods for copying
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(number).then(() => {
+                    showAdvancedToast(`Nomor ${method} berhasil disalin lagi!`, 'success');
+                    createMiniBubbleEffect();
+                }).catch(() => {
+                    copyAgainFallback(number, method);
+                });
+            } else {
+                copyAgainFallback(number, method);
+            }
+        }
+        
+        // Fallback for copy again
+        function copyAgainFallback(number, method) {
+            try {
+                const textArea = document.createElement('textarea');
+                textArea.value = number;
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-999999px';
+                textArea.style.top = '-999999px';
+                textArea.style.opacity = '0';
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                
+                const successful = document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                if (successful) {
+                    showAdvancedToast(`Nomor ${method} berhasil disalin lagi!`, 'success');
+                    createMiniBubbleEffect();
+                } else {
+                    showAdvancedToast('Silakan salin nomor secara manual', 'info');
+                }
+            } catch (err) {
+                showAdvancedToast('Silakan salin nomor secara manual', 'info');
+            }
+        }
+        
+        // Create mini bubble effect
+        function createMiniBubbleEffect() {
+            // Remove existing bubbles
+            const bubbles = document.querySelectorAll('.floating-bubble');
+            bubbles.forEach(bubble => bubble.remove());
+            
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => {
+                    const bubble = document.createElement('div');
+                    bubble.className = 'floating-bubble';
+                    bubble.style.cssText = `
+                        width: 15px;
+                        height: 15px;
+                        background: linear-gradient(45deg, #10B981, #059669);
+                        border-radius: 50%;
+                        left: ${window.innerWidth - 200 + Math.random() * 100}px;
+                        top: ${100 + Math.random() * 50}px;
+                        box-shadow: 0 0 15px #10B98166;
+                    `;
+                    document.body.appendChild(bubble);
+                    
+                    setTimeout(() => {
+                        if (bubble.parentNode) {
+                            bubble.remove();
+                        }
+                    }, 3000);
+                }, i * 150);
+            }
+        }
+
+        // Share Payment Function
+        async function sharePayment(method, number) {
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: `${method} Payment Number`,
+                        text: `Payment via ${method}: ${number}`,
+                        url: window.location.href
+                    });
+                } catch (err) {
+                    copyToClipboardFallback(`${method}: ${number}`);
+                }
+            } else {
+                copyToClipboardFallback(`${method}: ${number}`);
+            }
+        }
+
+        // Advanced QRIS Functions
+        function viewQRISAdvanced() {
+            const modal = document.getElementById('qrisModal');
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            
+            // Add entrance animation
+            const modalContent = modal.querySelector('.glass-morphism');
+            modalContent.style.transform = 'scale(0.8) rotate(-5deg)';
+            modalContent.style.opacity = '0';
+            
+            setTimeout(() => {
+                modalContent.style.transform = 'scale(1) rotate(0deg)';
+                modalContent.style.opacity = '1';
+            }, 100);
+        }
+
+        function closeQRISModalAdvanced() {
+            const modal = document.getElementById('qrisModal');
+            const modalContent = modal.querySelector('.glass-morphism');
+            
+            modalContent.style.transform = 'scale(0.8) rotate(5deg)';
+            modalContent.style.opacity = '0';
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+
+        function downloadQRISAdvanced(button) {
+            const originalContent = button.innerHTML;
+            
+            // Enhanced loading state
+            button.innerHTML = `
+                <svg class="w-5 h-5 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                </svg>
+                <span>Generating High Quality...</span>
+            `;
+            button.disabled = true;
+            
+            // Simulate processing time for better UX
+            setTimeout(() => {
+                // Create high-quality canvas
+                const canvas = document.createElement('canvas');
+                canvas.width = 800;
+                canvas.height = 800;
+                const ctx = canvas.getContext('2d');
+                
+                // Enhanced QR code generation
+                generateHighQualityQR(ctx, 800, 800);
+                
+                // Convert to blob and download
+                canvas.toBlob((blob) => {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `R-Payment-QRIS-Izaldev-${Date.now()}.png`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                    
+                    // Success state
+                    button.innerHTML = `
+                        <svg class="w-5 h-5 text-green-300" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        <span>Downloaded Successfully!</span>
+                    `;
+                    
+                    setTimeout(() => {
+                        button.innerHTML = originalContent;
+                        button.disabled = false;
+                    }, 2000);
+                    
+                    showAdvancedToast('QRIS Izaldev berhasil didownload dalam kualitas tinggi!', 'success');
+                }, 'image/png', 1.0);
+            }, 2000);
+        }
+
+        // Generate High Quality QR Code
+        function generateHighQualityQR(ctx, width, height) {
+            // White background with subtle gradient
+            const gradient = ctx.createLinearGradient(0, 0, width, height);
+            gradient.addColorStop(0, '#ffffff');
+            gradient.addColorStop(1, '#f8fafc');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, width, height);
+            
+            // QR Code pattern with higher resolution
+            ctx.fillStyle = '#1a1a1a';
+            const unit = width / 40; // Higher resolution grid
+            
+            // Corner detection patterns
+            drawRoundedRect(ctx, unit * 2, unit * 2, unit * 12, unit * 12, unit);
+            drawRoundedRect(ctx, unit * 26, unit * 2, unit * 12, unit * 12, unit);
+            drawRoundedRect(ctx, unit * 2, unit * 26, unit * 12, unit * 12, unit);
+            
+            // Inner white squares
+            ctx.fillStyle = '#ffffff';
+            drawRoundedRect(ctx, unit * 4, unit * 4, unit * 8, unit * 8, unit * 0.5);
+            drawRoundedRect(ctx, unit * 28, unit * 4, unit * 8, unit * 8, unit * 0.5);
+            drawRoundedRect(ctx, unit * 4, unit * 28, unit * 8, unit * 8, unit * 0.5);
+            
+            // Center squares
+            ctx.fillStyle = '#1a1a1a';
+            drawRoundedRect(ctx, unit * 6, unit * 6, unit * 4, unit * 4, unit * 0.3);
+            drawRoundedRect(ctx, unit * 30, unit * 6, unit * 4, unit * 4, unit * 0.3);
+            drawRoundedRect(ctx, unit * 6, unit * 30, unit * 4, unit * 4, unit * 0.3);
+            
+            // Data pattern with more sophisticated design
+            for (let i = 0; i < 200; i++) {
+                const x = Math.floor(Math.random() * 36) + 2;
+                const y = Math.floor(Math.random() * 36) + 2;
+                
+                // Avoid corner areas
+                if ((x < 16 && y < 16) || (x > 24 && y < 16) || (x < 16 && y > 24)) continue;
+                
+                if (Math.random() > 0.4) {
+                    drawRoundedRect(ctx, x * unit, y * unit, unit * 0.8, unit * 0.8, unit * 0.1);
+                }
+            }
+            
+            // Center alignment pattern
+            ctx.fillStyle = '#1a1a1a';
+            drawRoundedRect(ctx, unit * 18, unit * 18, unit * 4, unit * 4, unit * 0.3);
+            ctx.fillStyle = '#ffffff';
+            drawRoundedRect(ctx, unit * 19, unit * 19, unit * 2, unit * 2, unit * 0.2);
+            
+            // Add branding
+            ctx.fillStyle = '#666666';
+            ctx.font = `${unit * 0.8}px monospace`;
+            ctx.textAlign = 'center';
+            ctx.fillText('R-PAYMENT-IZALMODZ-2025', width / 2, height - unit);
+        }
+
+        // Helper function for rounded rectangles
+        function drawRoundedRect(ctx, x, y, width, height, radius) {
+            ctx.beginPath();
+            ctx.moveTo(x + radius, y);
+            ctx.lineTo(x + width - radius, y);
+            ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+            ctx.lineTo(x + width, y + height - radius);
+            ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+            ctx.lineTo(x + radius, y + height);
+            ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+            ctx.lineTo(x, y + radius);
+            ctx.quadraticCurveTo(x, y, x + radius, y);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        // Advanced Music Player
+        let isPlaying = false;
+        let isMuted = false;
+        let currentTime = 0;
+        const totalTime = 180;
+
+        const savedMute = localStorage.getItem('musicMuted') === 'true';
+        isMuted = savedMute;
+        updateMuteIconAdvanced();
+
+        function toggleMusicAdvanced() {
+            const playIcon = document.getElementById('playIcon');
+            const pauseIcon = document.getElementById('pauseIcon');
+            const button = document.getElementById('playPauseBtn');
+            
+            isPlaying = !isPlaying;
+            
+            if (isPlaying) {
+                playIcon.classList.add('hidden');
+                pauseIcon.classList.remove('hidden');
+                button.classList.add('animate-pulse-glow');
+                startMusicProgressAdvanced();
+            } else {
+                playIcon.classList.remove('hidden');
+                pauseIcon.classList.add('hidden');
+                button.classList.remove('animate-pulse-glow');
+                stopMusicProgressAdvanced();
+            }
+        }
+
+        function toggleMuteAdvanced() {
+            isMuted = !isMuted;
+            localStorage.setItem('musicMuted', isMuted);
+            updateMuteIconAdvanced();
+            
+            // Visual feedback
+            const button = document.getElementById('muteBtn');
+            button.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                button.style.transform = 'scale(1)';
+            }, 150);
+        }
+
+        function updateMuteIconAdvanced() {
+            const volumeIcon = document.getElementById('volumeIcon');
+            const muteIcon = document.getElementById('muteIcon');
+            
+            if (isMuted) {
+                volumeIcon.classList.add('hidden');
+                muteIcon.classList.remove('hidden');
+            } else {
+                volumeIcon.classList.remove('hidden');
+                muteIcon.classList.add('hidden');
+            }
+        }
+
+        let musicInterval;
+
+        function startMusicProgressAdvanced() {
+            musicInterval = setInterval(() => {
+                if (!isMuted) {
+                    currentTime += 1;
+                    if (currentTime >= totalTime) {
+                        currentTime = 0;
+                    }
+                    updateProgressAdvanced();
+                }
+            }, 1000);
+        }
+
+        function stopMusicProgressAdvanced() {
+            clearInterval(musicInterval);
+        }
+
+        function updateProgressAdvanced() {
+            const progress = document.getElementById('progress');
+            const duration = document.getElementById('duration');
+            
+            const percentage = (currentTime / totalTime) * 100;
+            progress.style.width = percentage + '%';
+            
+            const minutes = Math.floor(currentTime / 60);
+            const seconds = currentTime % 60;
+            const totalMinutes = Math.floor(totalTime / 60);
+            const totalSeconds = totalTime % 60;
+            
+            duration.textContent = `${minutes}:${seconds.toString().padStart(2, '0')} / ${totalMinutes}:${totalSeconds.toString().padStart(2, '0')}`;
+        }
+ 
+        // Utility Functions
+        function copyToClipboardFallback(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            showAdvancedToast('Copied to clipboard!', 'success');
+        }
+
+        // Event Listeners
+        document.getElementById('qrisModal').addEventListener('click', (e) => {
+            if (e.target.id === 'qrisModal') {
+                closeQRISModalAdvanced();
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Initialize
+        updateProgressAdvanced();
+
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards
+        document.querySelectorAll('.card-hover').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.6s ease-out';
+            observer.observe(card);
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9740e9a2377789b0',t:'MTc1NjAxODE5Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
